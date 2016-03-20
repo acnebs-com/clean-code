@@ -1,0 +1,14 @@
+[
+  {
+    "key"   : "key01",
+    "value" : "value01"
+  },
+  {
+    "key"   : "key02",
+    "value" : "value02"
+  },
+  {
+    "key"   : "key03",
+    "value" : "value03"
+  }
+]
