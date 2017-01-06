@@ -1,19 +1,20 @@
 package com.acnebs.posts.functionaldao.functional7;
 /**
- * Class Stuff2CsvConverter.
+ * Class User2CsvConverter.
  * <p>
  * Created by andreas.czakaj on 05.03.2016
  *
  * @author andreas.czakaj
  */
-class Stuff2CsvConverter {
-    private static final String FORMAT = "%s;%s";
+class User2CsvConverter {
+    private static final String FORMAT = "%s;%s;%s";
 
-    String convert(final Stuff stuff) {
+    String convert(final User user) {
         return String.format(
                 FORMAT,
-                getCleansedString(stuff.getKey()),
-                getCleansedString(stuff.getValue())
+                getCleansedString(user.getFirstName()),
+                getCleansedString(user.getLastName()),
+                getCleansedString(user.getEmail())
         );
     }
 

@@ -1,18 +1,18 @@
 package com.acnebs.posts.functionaldao.functional7;
 public class Main {
 
-    private final StuffExporter stuffExporter;
+    private final UserExporter userExporter;
     private final CsvWriter csvWriter;
 
-    public Main(final StuffDao stuffDao, final CsvWriter csvWriter) {
-        this.stuffExporter = new StuffExporter(stuffDao);
+    public Main(final UserDao userDao, final CsvWriter csvWriter) {
+        this.userExporter = new UserExporter(userDao);
         this.csvWriter = csvWriter;
     }
 
     int process() {
         csvWriter.writeLine("Key;Value");
-        return stuffExporter.getCsvLines(
-                new LineCallback() {
+        return userExporter.getCsvLines(
+                new LineConsumer() {
                     @Override
                     public void doOnLine(final String line) {
                         csvWriter.writeLine(line);
@@ -22,9 +22,9 @@ public class Main {
     }
 
     public static void main(final String[] args) {
-        final StuffDaoJsonImpl stuffDao = new StuffDaoJsonImpl("/stuff.json");
+        final UserDaoJsonImpl userDao = new UserDaoJsonImpl("/users.json");
         CsvWriter csvWriter = new CsvWriterOutputStreamImpl(System.out);
-        final Main main = new Main(stuffDao, csvWriter);
+        final Main main = new Main(userDao, csvWriter);
         main.process();
     }
 }

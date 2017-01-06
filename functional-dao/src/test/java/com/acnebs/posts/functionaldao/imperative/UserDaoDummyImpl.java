@@ -2,22 +2,22 @@ package com.acnebs.posts.functionaldao.imperative;
 import java.util.List;
 
 /**
- * Class StuffDaoDummyImpl.
+ * Class UserDaoDummyImpl.
  * <p>
  * Created by andreas.czakaj on 05.03.2016
  *
  * @author andreas.czakaj
  */
-class StuffDaoDummyImpl implements StuffDao {
+class UserDaoDummyImpl implements UserDao {
 
-    private List<Stuff> database;
+    private List<User> database;
 
-    public StuffDaoDummyImpl(final List<Stuff> database) {
+    public UserDaoDummyImpl(final List<User> database) {
         this.database = database;
     }
 
     @Override
-    public List<Stuff> loadAllStuff() {
+    public List<User> loadAllUsers() {
         return database;
     }
 }

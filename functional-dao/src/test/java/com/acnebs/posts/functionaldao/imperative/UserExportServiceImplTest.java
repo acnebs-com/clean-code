@@ -8,13 +8,13 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Class StuffExportServiceImplTest.
+ * Class UserExportServiceImplTest.
  * <p>
  * Created by andreas.czakaj on 05.03.2016
  *
  * @author andreas.czakaj
  */
-public class StuffExportServiceImplTest {
+public class UserExportServiceImplTest {
 
     @Test
     public void test_no_data() throws Exception {
@@ -25,26 +25,26 @@ public class StuffExportServiceImplTest {
     @Test
     public void test_1_item() throws Exception {
         final List<String> lines = createExporter(
-                new Stuff("key1", "val1")
+                new User("a", "b", "c")
         ).getCsvLines();
         assertEquals(1, lines.size());
-        assertEquals("key1;val1", lines.get(0));
+        assertEquals("a;b;c", lines.get(0));
     }
 
     @Test
     public void test_2_items() throws Exception {
         final List<String> lines = createExporter(
-                new Stuff("key1", "val1"),
-                new Stuff("key2", "val2")
+                new User("a1", "b1", "c1"),
+                new User("a2", "b2", "c2")
         ).getCsvLines();
         assertEquals(2, lines.size());
-        assertEquals("key1;val1", lines.get(0));
-        assertEquals("key2;val2", lines.get(1));
+        assertEquals("a1;b1;c1", lines.get(0));
+        assertEquals("a2;b2;c2", lines.get(1));
     }
 
-    StuffExporter createExporter(final Stuff...data) {
-        List<Stuff> database = new ArrayList<>();
+    UserExporter createExporter(final User...data) {
+        List<User> database = new ArrayList<>();
         Collections.addAll(database, data);
-        return new StuffExporter(new StuffDaoDummyImpl(database));
+        return new UserExporter(new UserDaoDummyImpl(database));
     }
 }

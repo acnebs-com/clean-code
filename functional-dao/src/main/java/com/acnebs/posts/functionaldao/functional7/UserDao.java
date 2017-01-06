@@ -1,11 +1,11 @@
 package com.acnebs.posts.functionaldao.functional7;
 /**
- * Interface StuffDao.
+ * Interface UserDao.
  * <p>
  * Created by andreas.czakaj on 05.03.2016
  *
  * @author andreas.czakaj
  */
-interface StuffDao {
-    void loadAllStuff(StuffCallback forEachStuff);
+interface UserDao {
+    void loadAllUsers(UserConsumer userConsumer);
 }

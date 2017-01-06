@@ -16,16 +16,16 @@ public class MainTest {
 
     @Test
     public void testProcess() throws Exception {
-        final List<Stuff> data = new ArrayList<Stuff>() {{
-            add(new Stuff("key1", "val1"));
-            add(new Stuff("key2", "val2"));
+        final List<User> data = new ArrayList<User>() {{
+            add(new User("Joey", "Ramone", "joey@ramones.net"));
+            add(new User("CJ", "Ramone", "cj@ramones.net"));
         }};
-        final StuffDaoDummyImpl stuffDao = new StuffDaoDummyImpl(data);
+        final UserDaoDummyImpl userDao = new UserDaoDummyImpl(data);
 
         final List<String> fakeFile = new ArrayList<>();
         final CsvWriter csvWriter = new CsvWriterDummyImpl(fakeFile);
 
-        Main main = new Main(stuffDao, csvWriter);
+        Main main = new Main(userDao, csvWriter);
         assertEquals("Should have processed 2 items", 2, main.process());
     }
 }

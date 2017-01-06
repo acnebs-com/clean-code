@@ -13,29 +13,32 @@ import java.util.function.Consumer;
 import java.util.stream.StreamSupport;
 
 /**
- * Class StuffDaoJsonImpl.
+ * Class UserDaoJsonImpl.
  * <p>
  * Created by andreas.czakaj on 05.03.2016
  *
  * @author andreas.czakaj
  */
-class StuffDaoJsonImpl implements StuffDao {
+class UserDaoJsonImpl implements UserDao {
 
     private final String path;
 
-    public StuffDaoJsonImpl(final String path) {
+    public UserDaoJsonImpl(final String path) {
         this.path = path;
     }
 
     @Override
-    public void loadAllStuff(final Consumer<Stuff> forEachStuff) {
-        loadAllStuff(
-                forEachStuff,
-                e -> {throw new RuntimeException("loadAllStuff: Exception e: " + e.getMessage(), e);}
+    public void loadAllUsers(final Consumer<User> userConsumer) {
+        loadAllUsers(
+                userConsumer,
+                e -> {
+                    throw new RuntimeException("loadAllUsers: Exception e: " + e.getMessage(), e);
+                }
         );
     }
 
-    public void loadAllStuff(final Consumer<Stuff> forEachStuff, final Consumer<Exception> onError) {
+    public void loadAllUsers(final Consumer<User> userConsumer,
+                             final Consumer<Exception> onError) {
         try {
             final URL resource = this.getClass().getResource(path);
             if (resource == null) {
@@ -43,7 +46,7 @@ class StuffDaoJsonImpl implements StuffDao {
             } else {
                 final InputStream is = resource.openStream();
                 final ObjectMapper mapper = new ObjectMapper();
-                final TypeReference<Stuff> valueTypeRef = new TypeReference<Stuff>() {};
+                final TypeReference<User> valueTypeRef = new TypeReference<User>() {};
                 final JsonNode jn = mapper.readValue(is, JsonNode.class);
                 final Spliterator<JsonNode> jsonNodeSpliterator = jn.spliterator();
 
@@ -51,15 +54,15 @@ class StuffDaoJsonImpl implements StuffDao {
                         .forEach(jsonNode -> {
                             try {
                                 final JsonParser jsonParser = jsonNode.traverse(mapper);
-                                final Stuff stuff = jsonParser.readValueAs(valueTypeRef);
-                                forEachStuff.accept(stuff);
+                                final User user = jsonParser.readValueAs(valueTypeRef);
+                                userConsumer.accept(user);
                             } catch (IOException e) {
                                 onError.accept(e);
                             }
                         });
             }
         } catch (IOException e) {
-            throw new RuntimeException("loadAllStuff: IOException e", e);
+            throw new RuntimeException("loadAllUsers: IOException e", e);
         }
     }
 }
