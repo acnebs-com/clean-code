@@ -15,7 +15,7 @@ public class Main {
         final List<String> csvLines = userExporter.getCsvLines();
 
         int linesWritten = 0;
-        csvWriter.writeLine("Key;Value");
+        csvWriter.writeLine("First Name;Last Name;Email");
         for (String line : csvLines) {
             csvWriter.writeLine(line);
             linesWritten++;

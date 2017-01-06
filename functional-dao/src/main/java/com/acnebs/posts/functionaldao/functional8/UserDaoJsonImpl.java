@@ -62,7 +62,7 @@ class UserDaoJsonImpl implements UserDao {
                         });
             }
         } catch (IOException e) {
-            throw new RuntimeException("loadAllUsers: IOException e", e);
+            onError.accept(e);
         }
     }
 }

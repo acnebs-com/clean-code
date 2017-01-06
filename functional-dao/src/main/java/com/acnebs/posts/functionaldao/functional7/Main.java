@@ -10,7 +10,7 @@ public class Main {
     }
 
     int process() {
-        csvWriter.writeLine("Key;Value");
+        csvWriter.writeLine("First Name;Last Name;Email");
         return userExporter.getCsvLines(
                 new LineConsumer() {
                     @Override
